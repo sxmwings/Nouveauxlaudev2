@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HYBRID MASTER 51 - Programme Complet v2.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080b12;
+      --card: #0d111a;
+      --accent: #F59E0B;
+      --accent-2: #ff8a00;
+      --secondary: #0EA5E9;
+      --success: #10b981;
+      --danger: #FF3B30;
+      --muted: #8b92a8;
+      --superset: #9333ea;
+      --intensif: #ec4899;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: linear-gradient(180deg, #06070a 0%, #080b12 100%);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, rgba(13,17,26,0.95), rgba(18,24,36,0.85));
+      padding: 24px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    
+    .logo { font-size: 48px; margin-bottom: 12px; }
+    
+    .title {
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .control-group {
+      background: rgba(13,17,26,0.95);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .control-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    select, input {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 2px solid rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 15px;
+      font-family: inherit;
+      font-weight: 600;
+    }
+    
+    select:focus, input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(245,158,11,0.1);
+    }
+    
+    .info-card {
+      background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(251,191,36,0.08));
+      border: 1px solid rgba(245,158,11,0.3);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .deload-warning {
+      background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(220,38,38,0.08));
+      border: 1px solid rgba(239,68,68,0.3);
+    }
+    
+    .workout-section {
+      background: rgba(13,17,26,0.95);
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .workout-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .exercise-block {
+      background: rgba(18,24,36,0.8);
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+    
+    .exercise-block:hover {
+      transform: translateX(4px);
+      box-shadow: 0 8px 24px rgba(245,158,11,0.15);
+    }
+    
+    .superset {
+      border-left: 4px solid var(--superset);
+      background: linear-gradient(135deg, rgba(147,51,234,0.12), rgba(126,34,206,0.06));
+    }
+    
+    .superset-label {
+      display: inline-block;
+      background: var(--superset);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+    
+    .exercise-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    
+    .exercise-params {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .param {
+      background: rgba(255,255,255,0.08);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    
+    .param.sets { color: var(--accent); border: 1px solid var(--accent); }
+    .param.weight { color: var(--success); border: 1px solid var(--success); }
+    .param.rest { color: var(--secondary); border: 1px solid var(--secondary); }
+    
+    .technique-badge {
+      background: linear-gradient(135deg, var(--intensif), #db2777);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-block;
+      margin-top: 10px;
+      margin-right: 8px;
+      box-shadow: 0 4px 12px rgba(236,72,153,0.3);
+    }
+    
+    .progression-info {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      border-left: 3px solid var(--success);
+    }
+    
+    .btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #000;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245,158,11,0.4);
+    }
+    
+    .btn.secondary {
+      background: linear-gradient(135deg, var(--secondary), #1e40af);
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .stat-card {
+      background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(255,138,0,0.06));
+      border: 1px solid rgba(245,158,11,0.25);
+      padding: 24px;
+      border-radius: 14px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(245,158,11,0.25);
+    }
+    
+    .stat-value {
+      font-size: 36px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    
+    .muscle-volume-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .muscle-card {
+      background: rgba(18,24,36,0.9);
+      padding: 16px;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+    }
+    
+    .muscle-name {
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    
+    .muscle-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    
+    .progress-bar {
+      background: rgba(255,255,255,0.1);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    
+    .progress-fill {
+      background: linear-gradient(90deg, var(--success), var(--accent));
+      height: 100%;
+      transition: width 0.5s ease;
+    }
+    
+    @media (max-width: 768px) {
+      .controls { grid-template-columns: 1fr; }
+      .exercise-params { flex-direction: column; }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+    
+    .test-results {
+      background: rgba(16,185,129,0.1);
+      border: 2px solid var(--success);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    
+    .test-pass { color: var(--success); }
+    .test-fail { color: var(--danger); }
+    
+    /* WORKOUT MODE STYLES */
+    .workout-mode {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .workout-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: var(--card);
+      border-radius: 16px;
+    }
+    
+    .timer-display {
+      font-size: 48px;
+      font-weight: 900;
+      text-align: center;
+      margin: 30px 0;
+      color: var(--accent);
+    }
+    
+    .timer-bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    
+    .timer-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), var(--accent));
+      transition: width 1s linear;
+    }
+    
+    .current-exercise {
+      background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(251,191,36,0.1));
+      border: 2px solid var(--accent);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .set-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .set-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .set-item.completed {
+      border-color: var(--success);
+      background: rgba(16,185,129,0.1);
+    }
+    
+    .set-item.active {
+      border-color: var(--accent);
+      background: rgba(245,158,11,0.1);
+    }
+    
+    .set-checkbox {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+    
+    .workout-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .modal-content {
+      background: var(--card);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    
+    .form-group input {
+      width: 100%;
+    }
+    
+    .history-item {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      border-left: 4px solid var(--accent);
+    }
+    
+    .history-date {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    
+    .history-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🏆</div>
+      <div class="title">HYBRID MASTER 51 - Programme Complet</div>
+      <div style="font-size: 14px; color: var(--muted);">
+        26 semaines · 4 blocs progressifs · Techniques d'intensification · Progression automatique
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <div class="control-label">📅 Semaine (1-26)</div>
+        <select id="weekSelect" onchange="app.updateDisplay()"></select>
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">🗓️ Jour d'entraînement</div>
+        <select id="daySelect" onchange="app.updateDisplay()">
+          <option value="dimanche">Dimanche - Dos + Jambes Lourdes + Bras</option>
+          <option value="mardi">Mardi - Pecs + Épaules + Triceps</option>
+          <option value="vendredi">Vendredi - Dos + Jambes + Bras + Épaules</option>
+          <option value="maison">Maison - Hammer Curl (Mardi & Jeudi soir)</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <div class="control-label">📊 Bloc actuel</div>
+        <div id="blockDisplay" style="font-size: 18px; font-weight: 800; color: var(--accent); margin-top: 8px;">
+          Chargement...
+        </div>
+      </div>
+      
+      <div class="control-group">
+        <div class="control-label">📈 Actions</div>
+        <button class="btn" onclick="app.startWorkout()" style="width: 100%; margin-bottom: 10px;">💪 Démarrer séance</button>
+        <button class="btn secondary" onclick="app.showHistory()" style="width: 100%; margin-bottom: 10px;">📊 Historique</button>
+        <button class="btn secondary" onclick="app.editExercises()" style="width: 100%; margin-bottom: 10px;">✏️ Éditer exercices</button>
+        <button class="btn" onclick="app.showTests()" style="width: 100%;">🧪 Tests de validation</button>
+      </div>
+    </div>
+
+    <div id="infoCard"></div>
+    
+    <!-- Section Rotation Biceps -->
+    <div class="workout-section">
+      <div class="workout-title">
+        <span style="font-size: 36px;">🔄</span>
+        <div>
+          Rotation des Exercices Biceps
+          <div style="font-size: 14px; color: var(--muted); font-weight: 400; margin-top: 6px;">
+            Alternance stratégique pour stimulation complète
+          </div>
+        </div>
+      </div>
+      <div id="bicepsRotation" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;"></div>
+    </div>
+
+    <div id="workoutDisplay"></div>
+
+    <!-- Section Échauffement -->
+    <div class="workout-section">
+      <div class="workout-title">
+        <span style="font-size: 36px;">🔥</span>
+        <div>
+          Protocole d'Échauffement (15 min)
+          <div style="font-size: 14px; color: var(--muted); font-weight: 400; margin-top: 6px;">
+            Obligatoire avant chaque séance
+          </div>
+        </div>
+      </div>
+      
+      <div class="exercise-block">
+        <div class="exercise-name">Phase 1 : Cardio Léger (5 min)</div>
+        <div class="exercise-params">
+          <span class="param">🚴 Vélo/Rameur/Tapis</span>
+          <span class="param">💓 60-70% FC max</span>
+        </div>
+      </div>
+      
+      <div class="exercise-block">
+        <div class="exercise-name">Phase 2 : Mobilité Articulaire (5 min)</div>
+        <div style="color: var(--muted); margin-top: 10px;">
+          • Rotations épaules: 2×10 avant/arrière<br>
+          • Cat-Cow (dos): 2×10<br>
+          • Leg Swings (hanches): 2×10 chaque jambe<br>
+          • Rotations poignets/chevilles: 2×10<br>
+          • Dislocations épaules (bâton): 2×10
+        </div>
+      </div>
+      
+      <div class="exercise-block">
+        <div class="exercise-name">Phase 3 : Échauffement Spécifique (5 min)</div>
+        <div style="color: var(--muted); margin-top: 10px;">
+          Exemple Trap Bar Deadlift (100kg):<br>
+          • Barre vide × 10 reps<br>
+          • 40kg × 8 reps<br>
+          • 60kg × 5 reps<br>
+          • 80kg × 3 reps<br>
+          • 90kg × 1 rep<br>
+          → 100kg × 6-8 reps (série travail)
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Séance Maison -->
+    <div class="workout-section">
+      <div class="workout-title">
+        <span style="font-size: 36px;">🏠</span>
+        <div>
+          Séance Maison - Hammer Curl
+          <div style="font-size: 14px; color: var(--muted); font-weight: 400; margin-top: 6px;">
+            Mardi & Jeudi soir - 15 minutes
+          </div>
+        </div>
+      </div>
+      
+      <div class="exercise-block">
+        <div class="exercise-name">Hammer Curl</div>
+        <div class="exercise-params">
+          <span class="param sets">📊 3 séries</span>
+          <span class="param">🔢 12 reps</span>
+          <span class="param weight">⚖️ <span id="hammerCurlWeight">12</span>kg</span>
+          <span class="param rest">⏱️ 60s repos</span>
+        </div>
+        <div class="progression-info">
+          💹 <strong>Progression:</strong> +2.5kg / 3 semaines | 
+          <strong>Départ S1:</strong> 12kg | 
+          <strong>Objectif S26:</strong> 34.5kg
+        </div>
+      </div>
+    </div>
+
+    <div id="statsDisplay"></div>
+    <div id="muscleVolumeDisplay"></div>
+    <div id="testResults"></div>
+  </div>
+
+  <script>
+    class HybridMaster51 {
+      constructor() {
+        this.currentWeek = 1;
+        this.currentDay = 'dimanche';
+        this.workoutSession = null;
+        this.timerInterval = null;
+        this.workoutHistory = [];
+        this.init();
+      }
+
+      init() {
+        this.setupProgram();
+        this.populateWeekSelect();
+        this.loadUserData();
+        this.updateDisplay();
+      }
+      
+      populateWeekSelect() {
+        const select = document.getElementById('weekSelect');
+        select.innerHTML = '';
+        for(let i = 1; i <= 26; i++) {
+          const option = document.createElement('option');
+          option.value = i;
+          option.textContent = `Semaine ${i}`;
+          if (i === 1) option.selected = true;
+          select.appendChild(option);
+        }
+      }
+
+      setupProgram() {
+        this.program = {
+          dimanche: {
+            title: "Dimanche - Dos + Jambes Lourdes + Bras",
+            duration: 68,
+            totalSets: 31,
+            exercises: [
+              {
+                name: "Trap Bar Deadlift",
+                sets: 5, reps: "6-8", rest: 120,
+                startWeight: 75, increment: 5, frequency: 3, targetWeight: 120,
+                type: "compound",
+                muscles: {primary: ["Ischios","Fessiers","Dos"], secondary: ["Quadriceps"], tertiary: []}
+              },
+              {
+                name: "Goblet Squat",
+                sets: 4, reps: "10", rest: 75,
+                startWeight: 25, increment: 2.5, frequency: 2, targetWeight: 57.5,
+                type: "compound",
+                muscles: {primary: ["Quadriceps","Fessiers"], secondary: ["Ischios"], tertiary: []}
+              },
+              {
+                name: "Leg Press",
+                sets: 4, reps: "10", rest: 75,
+                startWeight: 110, increment: 10, frequency: 2, targetWeight: 240,
+                type: "compound",
+                muscles: {primary: ["Quadriceps","Ischios"], secondary: ["Fessiers"], tertiary: []}
+              },
+              {
+                name: "Lat Pulldown (prise large)",
+                sets: 4, reps: "10", rest: 90,
+                startWeight: 60, increment: 2.5, frequency: 2, targetWeight: 92.5,
+                type: "compound", superset: true, supersetWith: "Landmine Press",
+                muscles: {primary: ["Dos"], secondary: ["Biceps"], tertiary: []}
+              },
+              {
+                name: "Landmine Press",
+                sets: 4, reps: "10", rest: 90,
+                startWeight: 35, increment: 2.5, frequency: 2, targetWeight: 67.5,
+                type: "compound", superset: true, supersetWith: "Lat Pulldown (prise large)",
+                muscles: {primary: ["Épaules","Triceps"], secondary: ["Pectoraux"], tertiary: []}
+              },
+              {
+                name: "Rowing Machine (prise large)",
+                sets: 4, reps: "10", rest: 75,
+                startWeight: 50, increment: 2.5, frequency: 2, targetWeight: 82.5,
+                type: "compound",
+                muscles: {primary: ["Dos"], secondary: ["Biceps"], tertiary: []}
+              },
+              {
+                name: "BICEPS_ROTATION",
+                sets: 4, reps: "12", rest: 75,
+                startWeight: 12, increment: 2.5, frequency: 3, targetWeight: 34.5,
+                type: "isolation", superset: true, supersetWith: "Cable Pushdown",
+                muscles: {primary: ["Biceps"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Cable Pushdown",
+                sets: 3, reps: "12", rest: 75,
+                startWeight: 20, increment: 2.5, frequency: 3, targetWeight: 42.5,
+                type: "isolation", superset: true, supersetWith: "BICEPS_ROTATION",
+                muscles: {primary: ["Triceps"], secondary: [], tertiary: []}
+              }
+            ]
+          },
+          mardi: {
+            title: "Mardi - Pecs + Épaules + Triceps",
+            duration: 70,
+            totalSets: 35,
+            exercises: [
+              {
+                name: "Dumbbell Press",
+                sets: 5, reps: "10", rest: 105,
+                startWeight: 22, increment: 2.5, frequency: 3, targetWeight: 45,
+                type: "compound",
+                muscles: {primary: ["Pectoraux"], secondary: ["Triceps","Épaules"], tertiary: []}
+              },
+              {
+                name: "Cable Fly (poulies moyennes)",
+                sets: 4, reps: "12", rest: 60,
+                startWeight: 10, increment: 2.5, frequency: 3, targetWeight: 32.5,
+                type: "isolation",
+                muscles: {primary: ["Pectoraux"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Leg Press léger",
+                sets: 3, reps: "15", rest: 60,
+                startWeight: 80, increment: 10, frequency: 3, targetWeight: 170,
+                type: "compound",
+                muscles: {primary: ["Quadriceps"], secondary: ["Fessiers"], tertiary: []}
+              },
+              {
+                name: "Extension Triceps Corde",
+                sets: 5, reps: "12", rest: 75,
+                startWeight: 20, increment: 2.5, frequency: 3, targetWeight: 42.5,
+                type: "isolation", superset: true, supersetWith: "Lateral Raises",
+                muscles: {primary: ["Triceps"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Lateral Raises",
+                sets: 5, reps: "15", rest: 75,
+                startWeight: 8, increment: 2.5, frequency: 4, targetWeight: 23,
+                type: "isolation", superset: true, supersetWith: "Extension Triceps Corde",
+                muscles: {primary: ["Épaules latérales"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Face Pull",
+                sets: 5, reps: "15", rest: 60,
+                startWeight: 20, increment: 2.5, frequency: 3, targetWeight: 42.5,
+                type: "isolation",
+                muscles: {primary: ["Épaules postérieures"], secondary: ["Trapèzes"], tertiary: []}
+              },
+              {
+                name: "Rowing Machine (prise serrée)",
+                sets: 4, reps: "12", rest: 75,
+                startWeight: 50, increment: 2.5, frequency: 2, targetWeight: 82.5,
+                type: "compound",
+                muscles: {primary: ["Dos"], secondary: ["Biceps"], tertiary: []}
+              },
+              {
+                name: "Overhead Extension (corde, assis)",
+                sets: 4, reps: "12", rest: 60,
+                startWeight: 15, increment: 2.5, frequency: 3, targetWeight: 37.5,
+                type: "isolation",
+                muscles: {primary: ["Triceps longs"], secondary: [], tertiary: []}
+              }
+            ]
+          },
+          vendredi: {
+            title: "Vendredi - Dos + Jambes Légères + Bras + Épaules",
+            duration: 73,
+            totalSets: 33,
+            exercises: [
+              {
+                name: "Landmine Row",
+                sets: 5, reps: "10", rest: 105,
+                startWeight: 55, increment: 2.5, frequency: 2, targetWeight: 87.5,
+                type: "compound",
+                muscles: {primary: ["Dos"], secondary: ["Biceps"], tertiary: []}
+              },
+              {
+                name: "Leg Curl",
+                sets: 5, reps: "12", rest: 75,
+                startWeight: 40, increment: 5, frequency: 3, targetWeight: 85,
+                type: "isolation", superset: true, supersetWith: "Leg Extension",
+                muscles: {primary: ["Ischios"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Leg Extension",
+                sets: 4, reps: "15", rest: 75,
+                startWeight: 35, increment: 5, frequency: 3, targetWeight: 80,
+                type: "isolation", superset: true, supersetWith: "Leg Curl",
+                muscles: {primary: ["Quadriceps"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Cable Fly",
+                sets: 4, reps: "15", rest: 60,
+                startWeight: 10, increment: 2.5, frequency: 3, targetWeight: 32.5,
+                type: "isolation", superset: true, supersetWith: "Dumbbell Fly",
+                muscles: {primary: ["Pectoraux"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Dumbbell Fly",
+                sets: 4, reps: "12", rest: 60,
+                startWeight: 10, increment: 2.5, frequency: 3, targetWeight: 32.5,
+                type: "isolation", superset: true, supersetWith: "Cable Fly",
+                muscles: {primary: ["Pectoraux"], secondary: [], tertiary: []}
+              },
+              {
+                name: "EZ Bar Curl",
+                sets: 5, reps: "12", rest: 75,
+                startWeight: 25, increment: 2.5, frequency: 3, targetWeight: 47.5,
+                type: "isolation", superset: true, supersetWith: "Overhead Extension",
+                muscles: {primary: ["Biceps"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Overhead Extension",
+                sets: 3, reps: "12", rest: 75,
+                startWeight: 15, increment: 2.5, frequency: 3, targetWeight: 37.5,
+                type: "isolation", superset: true, supersetWith: "EZ Bar Curl",
+                muscles: {primary: ["Triceps"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Lateral Raises",
+                sets: 3, reps: "15", rest: 60,
+                startWeight: 8, increment: 2.5, frequency: 4, targetWeight: 23,
+                type: "isolation",
+                muscles: {primary: ["Épaules latérales"], secondary: [], tertiary: []}
+              },
+              {
+                name: "Wrist Curl",
+                sets: 3, reps: "20", rest: 45,
+                startWeight: 30, increment: 2.5, frequency: 4, targetWeight: 47.5,
+                type: "isolation",
+                muscles: {primary: ["Avant-bras"], secondary: [], tertiary: []}
+              }
+            ]
+          },
+          maison: {
+            title: "Séance Maison (2×/semaine - Mardi & Jeudi soir)",
+            duration: 15,
+            totalSets: 3,
+            exercises: [
+              {
+                name: "Hammer Curl",
+                sets: 3, reps: "12", rest: 60,
+                startWeight: 12, increment: 2.5, frequency: 3, targetWeight: 34.5,
+                type: "isolation",
+                muscles: {primary: ["Biceps"], secondary: ["Avant-bras"], tertiary: []}
+              }
+            ]
+          }
+        };
+
+        this.deloadWeeks = [6, 12, 18, 24, 26];
+        
+        this.blocks = {
+          1: { weeks: [1,2,3,4,5], name: "Fondation", tempo: "3-1-2", rpe: "6-7" },
+          2: { weeks: [7,8,9,10,11], name: "Surcharge", tempo: "2-1-2", rpe: "7-8" },
+          3: { weeks: [13,14,15,16,17], name: "Surcompensation", tempo: "2-1-2", rpe: "8" },
+          4: { weeks: [19,20,21,22,23,25], name: "Intensification", tempo: "2-1-2", rpe: "8-9" }
+        };
+      }
+
+      getCurrentBlock(week) {
+        for (let [blockNum, block] of Object.entries(this.blocks)) {
+          if (block.weeks.includes(week)) return parseInt(blockNum);
+        }
+        return null;
+      }
+
+      isDeloadWeek(week) {
+        return this.deloadWeeks.includes(week);
+      }
+
+      getBicepsExercise(week) {
+        const block = this.getCurrentBlock(week);
+        if (!block) return "Incline Curl";
+        return (block === 2 || block === 4) ? "Spider Curl" : "Incline Curl";
+      }
+
+      getBicepsRotation(week) {
+        const block = this.getCurrentBlock(week);
+        const rotations = {
+          1: { dimanche: "Incline Curl", description: "Étirement maximal" },
+          2: { dimanche: "Spider Curl", description: "Contraction maximale" },
+          3: { dimanche: "Incline Curl", description: "Étirement maximal" },
+          4: { dimanche: "Spider Curl", description: "Contraction maximale" }
+        };
+        
+        return rotations[block] || { dimanche: "Incline Curl", description: "Standard" };
+      }
+
+      calculateWeight(exercise, week) {
+        const { startWeight, increment, frequency } = exercise;
+        
+        let progressions = 0;
+        
+        for (let w = 1; w <= week; w++) {
+          if (this.isDeloadWeek(w)) continue;
+          if ((w - 1) % frequency === 0) {
+            progressions++;
+          }
+        }
+        
+        let weight = startWeight + (increment * progressions);
+        
+        if (this.isDeloadWeek(week)) {
+          weight = weight * 0.6;
+        }
+        
+        // Mettre à jour le poids Hammer Curl dans l'interface
+        if (exercise.name === "Hammer Curl") {
+          setTimeout(() => {
+            const element = document.getElementById('hammerCurlWeight');
+            if (element) element.textContent = Math.round(weight * 10) / 10;
+          }, 100);
+        }
+        
+        return Math.round(weight * 10) / 10;
+      }
+
+      getTechniques(week, exercise) {
+        const block = this.getCurrentBlock(week);
+        if (!block || this.isDeloadWeek(week)) return [];
+        
+        const techniques = [];
+        const blockData = this.blocks[block];
+        
+        if (block === 1) {
+          techniques.push(`Tempo ${blockData.tempo} (3s descente, 1s pause, 2s montée)`);
+          
+          const pausesDetaillees = {
+            "Cable Fly (poulies moyennes)": "Pause 2s bras écartés - Étirement maximal pectoraux",
+            "Cable Fly": "Pause 2s bras écartés - Étirement maximal pectoraux", 
+            "Dumbbell Fly": "Pause 2s bras écartés - Tension continue",
+            "Incline Curl": "Pause 2s bras tendus - Étirement biceps complet",
+            "Spider Curl": "Pause 2s bras tendus - Étirement biceps complet",
+            "EZ Bar Curl": "Pause 2s bras tendus - Amplitude maximale",
+            "Lateral Raises": "Pause 1s bras horizontaux - Pic de contraction",
+            "Face Pull": "Pause 1s contraction arrière - Activation postérieure"
+          };
+          
+          if (pausesDetaillees[exercise.name]) {
+            techniques.push(`⏱️ ${pausesDetaillees[exercise.name]}`);
+          }
+        }
+        
+        if (block === 2) {
+          techniques.push(`Tempo ${blockData.tempo}`);
+          
+          const restPauseDetail = {
+            "Trap Bar Deadlift": "Série 5: 6-8 reps → repos 20s → 2-3 reps supplémentaires (fatigue neurale)",
+            "Dumbbell Press": "Série 5: 10 reps → repos 20s → 3-4 reps supplémentaires (volume accru)", 
+            "Landmine Row": "Série 5: 10 reps → repos 20s → 3-4 reps supplémentaires (endurance dos)"
+          };
+          
+          if (restPauseDetail[exercise.name]) {
+            techniques.push(`🔄 REST-PAUSE: ${restPauseDetail[exercise.name]}`);
+          }
+        }
+        
+        if (block === 3) {
+          const dropSetsDetail = {
+            "Goblet Squat": "Série 4: -25% charge → 8-10 reps supplémentaires (fatigue quadriceps)",
+            "Leg Press": "Série 4: -25% charge → 10-12 reps supplémentaires (pompage sanguin)",
+            "Lat Pulldown (prise large)": "Série 4: -20% charge → 8-10 reps supplémentaires",
+            "Dumbbell Press": "Série 5: -25% charge → 8-10 reps supplémentaires",
+            "Cable Fly (poulies moyennes)": "Série 4: -25% charge → 10-12 reps supplémentaires",
+            "Extension Triceps Corde": "Série 5: -20% charge → 10-12 reps supplémentaires",
+            "Lateral Raises": "Série 5: -25% charge → 12-15 reps supplémentaires",
+            "Landmine Row": "Série 5: -20% charge → 8-10 reps supplémentaires",
+            "Leg Curl": "Série 5: -25% charge → 10-12 reps supplémentaires",
+            "Leg Extension": "Série 4: -25% charge → 12-15 reps supplémentaires",
+            "Dumbbell Fly": "Série 4: -25% charge → 10-12 reps supplémentaires"
+          };
+          
+          if (dropSetsDetail[exercise.name]) {
+            techniques.push(`📉 DROP-SET: ${dropSetsDetail[exercise.name]}`);
+          }
+          
+          const myoRepsDetail = {
+            "Face Pull": "Série 5: 15 reps → repos 5s → 5×5 reps (activation postérieure)",
+            "Overhead Extension (corde, assis)": "Série 4: 12 reps → repos 5s → 4×4 reps (triceps longs)",
+            "Overhead Extension": "Série 4: 12 reps → repos 5s → 4×4 reps (triceps longs)",
+            "Incline Curl": "Série 4: 12 reps → repos 5s → 4×4 reps (biceps)",
+            "Spider Curl": "Série 4: 12 reps → repos 5s → 4×4 reps (biceps)",
+            "Cable Fly": "Série 4: 15 reps → repos 5s → 5×5 reps (pectoraux)",
+            "Rowing Machine (prise large)": "Série 4: 12 reps → repos 5s → 4×4 reps (dos)",
+            "Rowing Machine (prise serrée)": "Série 4: 12 reps → repos 5s → 4×4 reps (dos)"
+          };
+          
+          if (myoRepsDetail[exercise.name]) {
+            techniques.push(`⚡ MYO-REPS: ${myoRepsDetail[exercise.name]}`);
+          }
+        }
+        
+        if (block === 4) {
+          const clustersDetail = {
+            "Trap Bar Deadlift": "Série 5: 3 reps → 20s → 2 reps → 20s → 2 reps (7 total - intensité maximale)",
+            "Dumbbell Press": "Série 5: 4 reps → 15s → 3 reps → 15s → 3 reps (10 total - volume qualité)",
+            "Landmine Row": "Série 5: 4 reps → 15s → 3 reps → 15s → 3 reps (10 total - endurance)",
+            "Leg Press": "Série 4: 4 reps → 20s → 3 reps → 20s → 3 reps (10 total - puissance)"
+          };
+          
+          if (clustersDetail[exercise.name]) {
+            techniques.push(`🎯 CLUSTER SETS: ${clustersDetail[exercise.name]}`);
+          }
+          
+          const partialsDetail = {
+            "Goblet Squat": "Série 4: 10 complètes → 5 demi-reps amplitude haute (brûlure quadriceps)",
+            "Leg Press": "Série 4: 10 complètes → 8 quarts de reps (congestion extrême)",
+            "Leg Curl": "Série 5: 12 complètes → 6-8 partials amplitude haute (ischios)",
+            "Leg Extension": "Série 4: 15 complètes → 10 partials derniers 30° (quadriceps)"
+          };
+          
+          if (partialsDetail[exercise.name]) {
+            techniques.push(`📏 PARTIALS: ${partialsDetail[exercise.name]}`);
+          }
+          
+          // Myo-reps sur toutes les isolations
+          if (exercise.type === "isolation" && !clustersDetail[exercise.name]) {
+            techniques.push(`⚡ MYO-REPS: Dernière série → repos 5s → 3-5 mini-sets jusqu'à échec`);
+          }
+        }
+        
+        return techniques;
+      }
+
+      updateDisplay() {
+        const week = parseInt(document.getElementById('weekSelect').value);
+        const day = document.getElementById('daySelect').value;
+        
+        this.currentWeek = week;
+        this.currentDay = day;
+        
+        this.renderInfo();
+        this.renderWorkout();
+        this.renderStats();
+        this.renderMuscleVolume();
+        this.renderBicepsRotation();
+        
+        // Mettre à jour Hammer Curl
+        const hammerCurlEx = {
+          name: "Hammer Curl",
+          startWeight: 12,
+          increment: 2.5,
+          frequency: 3
+        };
+        this.calculateWeight(hammerCurlEx, week);
+      }
+
+      renderBicepsRotation() {
+        const week = this.currentWeek;
+        const rotation = this.getBicepsRotation(week);
+        const block = this.getCurrentBlock(week);
+        
+        const html = `
+          <div style="text-align: center; padding: 15px; background: rgba(245,158,11,0.1); border-radius: 10px;">
+            <div style="font-size: 18px; font-weight: 800; color: var(--accent);">
+              Semaine ${week} - Bloc ${block}
+            </div>
+            <div style="margin-top: 10px;">
+              <strong>Dimanche:</strong> ${rotation.dimanche} - ${rotation.description}
+            </div>
+            <div>
+              <strong>Vendredi:</strong> EZ Bar Curl - Contraction complète
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('bicepsRotation').innerHTML = html;
+      }
+
+      renderInfo() {
+        const week = this.currentWeek;
+        const block = this.getCurrentBlock(week);
+        const isDeload = this.isDeloadWeek(week);
+        
+        let blockInfo = '';
+        if (block) {
+          const blockData = this.blocks[block];
+          blockInfo = `Bloc ${block} - ${blockData.name} | Tempo ${blockData.tempo} | RPE ${blockData.rpe}`;
+        }
+        
+        document.getElementById('blockDisplay').innerHTML = blockInfo || '⚠️ Deload';
+        
+        let infoHtml = '';
+        
+        if (isDeload) {
+          infoHtml = `
+            <div class="info-card deload-warning">
+              <div style="font-size: 22px; font-weight: 900; margin-bottom: 12px;">
+                ⚠️ SEMAINE DELOAD ${week}
+              </div>
+              <div style="font-size: 15px; line-height: 1.8;">
+                • <strong>Charges réduites à 60% (-40%)</strong><br>
+                • Tempo ralenti: 4-1-2 (4s descente, 1s pause, 2s montée)<br>
+                • RPE 5-6 (très facile)<br>
+                • <strong>AUCUNE technique d'intensification</strong><br>
+                • Focus: récupération et technique parfaite
+              </div>
+            </div>
+          `;
+        } else if (block) {
+          const blockData = this.blocks[block];
+          let techniqueInfo = '';
+          
+          if (block === 1) {
+            techniqueInfo = `
+              <strong>Techniques Bloc 1 - Fondation:</strong><br>
+              • Tempo contrôlé ${blockData.tempo} (3s descente, 1s pause, 2s montée)<br>
+              • Pauses isométriques sur isolations (Cable/Dumbbell Fly, Curls, Lateral Raises, Face Pull)<br>
+              • Focus: perfection technique absolue<br>
+              • RPE: ${blockData.rpe}
+            `;
+          } else if (block === 2) {
+            techniqueInfo = `
+              <strong>Techniques Bloc 2 - Surcharge:</strong><br>
+              • <strong>Rest-Pause</strong> sur exercices principaux (Série 5): Trap Bar DL, Dumbbell Press, Landmine Row<br>
+              • Protocol: reps normales → 20s repos → 2-4 reps additionnelles<br>
+              • Tempo: ${blockData.tempo}<br>
+              • RPE: ${blockData.rpe}
+            `;
+          } else if (block === 3) {
+            techniqueInfo = `
+              <strong>Techniques Bloc 3 - Surcompensation:</strong><br>
+              • <strong>Drop-Sets</strong> sur dernières séries (Goblet Squat, Leg Press, Lat Pulldown, Dumbbell Press, Cable Fly, Extension Triceps, Lateral Raises, Landmine Row, Leg Curl/Extension, Dumbbell Fly)<br>
+              • <strong>Myo-Reps</strong> sur isolations sélectionnées (Face Pull, Overhead Extension, Curls, Cable Fly, Rowing Machine)<br>
+              • Volume élevé - Stress métabolique maximal<br>
+              • RPE: ${blockData.rpe}
+            `;
+          } else if (block === 4) {
+            techniqueInfo = `
+              <strong>Techniques Bloc 4 - Intensification MAXIMALE:</strong><br>
+              • <strong>Cluster Sets</strong> sur mouvements lourds (Trap Bar DL, Dumbbell Press, Landmine Row, Leg Press)<br>
+              • <strong>Myo-Reps</strong> sur TOUTES les isolations (dernière série)<br>
+              • <strong>Partials</strong> sur exercices jambes (Goblet Squat, Leg Press, Leg Curl, Leg Extension)<br>
+              • Intensité maximale - Gains ultimes<br>
+              • RPE: ${blockData.rpe}
+            `;
+          }
+          
+          infoHtml = `
+            <div class="info-card">
+              <div style="font-size: 20px; font-weight: 900; margin-bottom: 12px; color: var(--accent);">
+                📋 Semaine ${week} - ${blockData.name}
+              </div>
+              <div style="font-size: 15px; line-height: 2;">
+                ${techniqueInfo}
+              </div>
+            </div>
+          `;
+        }
+        
+        document.getElementById('infoCard').innerHTML = infoHtml;
+      }
+
+      renderWorkout() {
+        const week = this.currentWeek;
+        const day = this.currentDay;
+        const workout = this.program[day];
+        
+        if (!workout) return;
+        
+        let html = `
+          <div class="workout-section">
+            <div class="workout-title">
+              <span style="font-size: 36px;">💪</span>
+              <div>
+                ${workout.title}
+                <div style="font-size: 14px; color: var(--muted); font-weight: 400; margin-top: 6px;">
+                  ${workout.totalSets} séries totales • ~${workout.duration} minutes
+                </div>
+              </div>
+            </div>
+        `;
+        
+        let supersetGroup = [];
+        
+        workout.exercises.forEach((exercise, index) => {
+          let exName = exercise.name;
+          
+          if (exName === "BICEPS_ROTATION") {
+            exName = this.getBicepsExercise(week);
+          }
+          
+          const weight = this.calculateWeight(exercise, week);
+          const techniques = this.getTechniques(week, exercise);
+          const progression = `+${exercise.increment}kg / ${exercise.frequency} semaines`;
+          
+          if (exercise.superset) {
+            supersetGroup.push({ ...exercise, name: exName, weight, techniques, progression });
+            
+            const nextEx = workout.exercises[index + 1];
+            if (!nextEx || !nextEx.superset || nextEx.supersetWith !== exercise.name) {
+              html += `<div class="exercise-block superset">`;
+              html += `<div class="superset-label">🔗 SUPERSET (${supersetGroup.length} exercices alternés)</div>`;
+              
+              supersetGroup.forEach(ex => {
+                html += this.renderExercise(ex);
+                if (supersetGroup.indexOf(ex) < supersetGroup.length - 1) {
+                  html += `<div style="text-align:center;margin:10px 0;color:var(--superset);font-weight:800;">↕️ ALTERNER AVEC ↕️</div>`;
+                }
+              });
+              
+              html += `</div>`;
+              supersetGroup = [];
+            }
+          } else {
+            html += `<div class="exercise-block">`;
+            html += this.renderExercise({ ...exercise, name: exName, weight, techniques, progression });
+            html += `</div>`;
+          }
+        });
+        
+        html += `</div>`;
+        
+        document.getElementById('workoutDisplay').innerHTML = html;
+      }
+
+      renderExercise(ex) {
+        let html = `
+          <div class="exercise-name">${ex.name}</div>
+          <div class="exercise-params">
+            <span class="param sets">📊 ${ex.sets} séries</span>
+            <span class="param">🔢 ${ex.reps} reps</span>
+            <span class="param weight">⚖️ ${ex.weight}kg</span>
+            <span class="param rest">⏱️ ${ex.rest}s repos</span>
+          </div>
+        `;
+        
+        if (ex.techniques && ex.techniques.length > 0) {
+          html += `<div style="margin-top: 12px;">`;
+          ex.techniques.forEach(tech => {
+            html += `<div class="technique-badge">${tech}</div>`;
+          });
+          html += `</div>`;
+        }
+        
+        html += `<div class="progression-info">
+          💹 <strong>Progression:</strong> ${ex.progression} | 
+          <strong>Départ S1:</strong> ${ex.startWeight}kg | 
+          <strong>Objectif S26:</strong> ${ex.targetWeight}kg
+        </div>`;
+        
+        return html;
+      }
+
+      renderStats() {
+        const week = this.currentWeek;
+        const day = this.currentDay;
+        const workout = this.program[day];
+        
+        if (!workout) return;
+        
+        let totalVolume = 0;
+        workout.exercises.forEach(ex => {
+          const weight = this.calculateWeight(ex, week);
+          const reps = typeof ex.reps === 'number' ? ex.reps : parseInt(ex.reps.split('-')[0]);
+          totalVolume += weight * reps * ex.sets;
+        });
+        
+        const musclesWorked = new Set();
+        workout.exercises.forEach(ex => {
+          if (ex.muscles) {
+            Object.values(ex.muscles).forEach(arr => arr.forEach(m => musclesWorked.add(m)));
+          }
+        });
+        
+        const html = `
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value">${workout.totalSets}</div>
+              <div class="stat-label">Séries totales</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-value">${Math.round(totalVolume/1000)}t</div>
+              <div class="stat-label">Volume total</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-value">${workout.duration}</div>
+              <div class="stat-label">Minutes</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-value">${musclesWorked.size}</div>
+              <div class="stat-label">Groupes musculaires</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-value">${workout.exercises.filter(e => e.superset).length}</div>
+              <div class="stat-label">Exercices en superset</div>
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('statsDisplay').innerHTML = html;
+      }
+
+      renderMuscleVolume() {
+        const week = this.currentWeek;
+        
+        const muscleVolume = {};
+        
+        ['dimanche', 'mardi', 'vendredi'].forEach(day => {
+          const workout = this.program[day];
+          workout.exercises.forEach(ex => {
+            let exName = ex.name;
+            if (exName === "BICEPS_ROTATION") {
+              exName = this.getBicepsExercise(week);
+            }
+            
+            if (ex.muscles) {
+              ex.muscles.primary.forEach(muscle => {
+                if (!muscleVolume[muscle]) muscleVolume[muscle] = {direct: 0, indirect: 0};
+                muscleVolume[muscle].direct += ex.sets;
+              });
+              
+              ex.muscles.secondary.forEach(muscle => {
+                if (!muscleVolume[muscle]) muscleVolume[muscle] = {direct: 0, indirect: 0};
+                muscleVolume[muscle].indirect += ex.sets * 0.6;
+              });
+              
+              ex.muscles.tertiary.forEach(muscle => {
+                if (!muscleVolume[muscle]) muscleVolume[muscle] = {direct: 0, indirect: 0};
+                muscleVolume[muscle].indirect += ex.sets * 0.3;
+              });
+            }
+          });
+        });
+        
+        if (!muscleVolume["Biceps"]) muscleVolume["Biceps"] = {direct: 0, indirect: 0};
+        muscleVolume["Biceps"].direct += 3 * 2;
+        
+        if (!muscleVolume["Avant-bras"]) muscleVolume["Avant-bras"] = {direct: 0, indirect: 0};
+        muscleVolume["Avant-bras"].indirect += 3 * 2 * 0.6;
+        
+        const optimalRanges = {
+          "Quadriceps": {min: 18, max: 24},
+          "Ischios": {min: 14, max: 20},
+          "Fessiers": {min: 14, max: 20},
+          "Dos": {min: 18, max: 24},
+          "Pectoraux": {min: 16, max: 22},
+          "Épaules postérieures": {min: 10, max: 14},
+          "Épaules latérales": {min: 6, max: 10},
+          "Biceps": {min: 14, max: 20},
+          "Triceps": {min: 12, max: 18},
+          "Avant-bras": {min: 6, max: 12},
+          "Trapèzes": {min: 8, max: 14}
+        };
+        
+        let html = `
+          <div class="workout-section">
+            <div class="workout-title">
+              <span style="font-size: 36px;">📊</span>
+              <div>
+                Volume Hebdomadaire par Muscle
+                <div style="font-size: 14px; color: var(--muted); font-weight: 400; margin-top: 6px;">
+                  Basé sur les 3 séances + Hammer Curl maison (2×/semaine)
+                </div>
+              </div>
+            </div>
+            <div class="muscle-volume-grid">
+        `;
+        
+        Object.entries(muscleVolume).sort((a,b) => {
+          const totalA = a[1].direct + a[1].indirect;
+          const totalB = b[1].direct + b[1].indirect;
+          return totalB - totalA;
+        }).forEach(([muscle, vol]) => {
+          const total = Math.round(vol.direct + vol.indirect);
+          const optimal = optimalRanges[muscle] || {min: 10, max: 20};
+          const isOptimal = total >= optimal.min && total <= optimal.max;
+          const percentage = Math.min(100, (total / optimal.max) * 100);
+          
+          html += `
+            <div class="muscle-card">
+              <div class="muscle-name">
+                ${isOptimal ? '✅' : '⚠️'} ${muscle}
+              </div>
+              <div style="font-size: 24px; font-weight: 900; color: ${isOptimal ? 'var(--success)' : 'var(--accent)'};">
+                ${total} séries
+              </div>
+              <div class="muscle-stats">
+                <span>Direct: ${Math.round(vol.direct)}</span>
+                <span>Indirect: ${Math.round(vol.indirect)}</span>
+              </div>
+              <div class="muscle-stats">
+                <span>Optimal: ${optimal.min}-${optimal.max}</span>
+                <span>${isOptimal ? 'PARFAIT' : 'ACCEPTABLE'}</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: ${percentage}%"></div>
+              </div>
+            </div>
+          `;
+        });
+        
+        html += `</div></div>`;
+        
+        document.getElementById('muscleVolumeDisplay').innerHTML = html;
+      }
+
+      async loadUserData() {
+        try {
+          // Simulation du chargement des données utilisateur
+          const savedHistory = localStorage.getItem('hm51-workout-history');
+          this.workoutHistory = savedHistory ? JSON.parse(savedHistory) : [];
+          
+          const savedCustom = localStorage.getItem('hm51-custom-exercises');
+          if (savedCustom) {
+            const custom = JSON.parse(savedCustom);
+            Object.assign(this.program, custom);
+          }
+        } catch(e) {
+          this.workoutHistory = [];
+          console.log('Stockage local disponible, initialisation des données');
+        }
+      }
+
+      async saveHistory(session) {
+        try {
+          this.workoutHistory = this.workoutHistory || [];
+          this.workoutHistory.push(session);
+          localStorage.setItem('hm51-workout-history', JSON.stringify(this.workoutHistory));
+        } catch(e) {
+          console.log('Impossible de sauvegarder l\'historique');
+        }
+      }
+
+      async saveCustomExercises() {
+        try {
+          localStorage.setItem('hm51-custom-exercises', JSON.stringify(this.program));
+        } catch(e) {
+          console.log('Impossible de sauvegarder les modifications');
+        }
+      }
+
+      startWorkout() {
+        const week = this.currentWeek;
+        const day = this.currentDay;
+        const workout = this.program[day];
+        
+        if (!workout) return;
+        
+        this.workoutSession = {
+          week,
+          day,
+          startTime: Date.now(),
+          exercises: workout.exercises.map((ex, idx) => {
+            let exName = ex.name;
+            if (exName === "BICEPS_ROTATION") {
+              exName = this.getBicepsExercise(week);
+            }
+            return {
+              name: exName,
+              sets: ex.sets,
+              reps: ex.reps,
+              weight: this.calculateWeight(ex, week),
+              rest: ex.rest,
+              completed: Array(ex.sets).fill(false),
+              currentSet: 0
+            };
+          }),
+          currentExerciseIdx: 0,
+          isPaused: false,
+          restTimeLeft: 0
+        };
+        
+        this.renderWorkoutMode();
+      }
+
+      renderWorkoutMode() {
+        const session = this.workoutSession;
+        if (!session) return;
+        
+        const currentEx = session.exercises[session.currentExerciseIdx];
+        const elapsed = Math.floor((Date.now() - session.startTime) / 1000 / 60);
+        
+        const completedSets = session.exercises.reduce((acc, ex) => 
+          acc + ex.completed.filter(Boolean).length, 0);
+        const totalSets = session.exercises.reduce((acc, ex) => acc + ex.sets, 0);
+        
+        let html = `
+          <div class="workout-mode">
+            <div class="workout-header">
+              <div>
+                <div style="font-size: 24px; font-weight: 900;">💪 Séance en cours</div>
+                <div style="color: var(--muted);">Semaine ${session.week} - ${session.day}</div>
+                <div style="color: var(--accent); font-weight: 700;">${completedSets}/${totalSets} séries • ${elapsed} min</div>
+              </div>
+              <button class="btn" onclick="app.pauseWorkout()" style="background: var(--danger);">
+                ${session.isPaused ? '▶️ Reprendre' : '⏸️ Pause'}
+              </button>
+            </div>
+            
+            <div class="current-exercise">
+              <div style="font-size: 28px; font-weight: 900; margin-bottom: 15px;">
+                ${currentEx.name}
+              </div>
+              <div class="exercise-params">
+                <span class="param sets">📊 ${currentEx.sets} séries</span>
+                <span class="param">🔢 ${currentEx.reps} reps</span>
+                <span class="param weight">⚖️ ${currentEx.weight}kg</span>
+                <span class="param rest">⏱️ ${currentEx.rest}s repos</span>
+              </div>
+              
+              <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button class="btn secondary" onclick="app.adjustWeight(-2.5)">-2.5kg</button>
+                <button class="btn secondary" onclick="app.adjustWeight(2.5)">+2.5kg</button>
+              </div>
+            </div>
+        `;
+        
+        if (session.restTimeLeft > 0 && !session.isPaused) {
+          const percentage = (session.restTimeLeft / currentEx.rest) * 100;
+          html += `
+            <div class="timer-display">${session.restTimeLeft}s</div>
+            <div class="timer-bar">
+              <div class="timer-fill" style="width: ${percentage}%;"></div>
+            </div>
+            <div style="text-align: center;">
+              <button class="btn" onclick="app.skipRest()">⏭️ Passer le repos</button>
+            </div>
+          `;
+        }
+        
+        html += `<div class="set-list">`;
+        for (let i = 0; i < currentEx.sets; i++) {
+          const isActive = i === currentEx.currentSet;
+          const isCompleted = currentEx.completed[i];
+          html += `
+            <div class="set-item ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}">
+              <input type="checkbox" class="set-checkbox" 
+                ${isCompleted ? 'checked' : ''} 
+                onchange="app.toggleSet(${i})"
+                ${isCompleted ? 'disabled' : ''}>
+              <span style="font-size: 18px; font-weight: 700;">
+                Série ${i+1} : ${currentEx.reps} reps @ ${currentEx.weight}kg
+              </span>
+              ${isCompleted ? '<span style="color: var(--success);">✅</span>' : ''}
+            </div>
+          `;
+        }
+        html += `</div>`;
+        
+        html += `
+          <div class="workout-controls">
+            <button class="btn secondary" onclick="app.previousExercise()" 
+              ${session.currentExerciseIdx === 0 ? 'disabled' : ''}>
+              ⬅️ Exercice précédent
+            </button>
+            <button class="btn" onclick="app.nextExercise()">
+              ➡️ Exercice suivant
+            </button>
+            <button class="btn" onclick="app.finishWorkout()" style="background: var(--success);">
+              ✅ Terminer la séance
+            </button>
+            <button class="btn" onclick="app.cancelWorkout()" style="background: var(--danger);">
+              ❌ Annuler
+            </button>
+          </div>
+          
+          </div>
+          `;
+        
+        // Supprimer l'ancien mode workout s'il existe
+        const existingWorkout = document.querySelector('.workout-mode');
+        if (existingWorkout) {
+          existingWorkout.remove();
+        }
+        
+        document.body.insertAdjacentHTML('beforeend', html);
+        
+        if (session.restTimeLeft > 0 && !session.isPaused) {
+          this.startRestTimer();
+        }
+      }
+
+      toggleSet(setIdx) {
+        const session = this.workoutSession;
+        if (!session) return;
+        
+        const currentEx = session.exercises[session.currentExerciseIdx];
+        
+        if (!currentEx.completed[setIdx]) {
+          currentEx.completed[setIdx] = true;
+          currentEx.currentSet = setIdx + 1;
+          
+          if (setIdx < currentEx.sets - 1) {
+            session.restTimeLeft = currentEx.rest;
+            this.refreshWorkoutMode();
+          } else if (session.currentExerciseIdx < session.exercises.length - 1) {
+            setTimeout(() => this.nextExercise(), 1000);
+          }
+        }
+      }
+
+      adjustWeight(delta) {
+        const session = this.workoutSession;
+        if (!session) return;
+        
+        const currentEx = session.exercises[session.currentExerciseIdx];
+        currentEx.weight = Math.max(0, currentEx.weight + delta);
+        this.refreshWorkoutMode();
+      }
+
+      startRestTimer() {
+        if (this.timerInterval) clearInterval(this.timerInterval);
+        
+        this.timerInterval = setInterval(() => {
+          const session = this.workoutSession;
+          if (!session || session.isPaused) return;
+          
+          session.restTimeLeft--;
+          
+          if (session.restTimeLeft <= 0) {
+            clearInterval(this.timerInterval);
+            this.playBeep();
+          }
+          
+          this.refreshWorkoutMode();
+        }, 1000);
+      }
+
+      skipRest() {
+        if (!this.workoutSession) return;
+        this.workoutSession.restTimeLeft = 0;
+        if (this.timerInterval) clearInterval(this.timerInterval);
+        this.refreshWorkoutMode();
+      }
+
+      pauseWorkout() {
+        if (!this.workoutSession) return;
+        this.workoutSession.isPaused = !this.workoutSession.isPaused;
+        if (this.workoutSession.isPaused && this.timerInterval) {
+          clearInterval(this.timerInterval);
+        } else if (!this.workoutSession.isPaused && this.workoutSession.restTimeLeft > 0) {
+          this.startRestTimer();
+        }
+        this.refreshWorkoutMode();
+      }
+
+      nextExercise() {
+        const session = this.workoutSession;
+        if (!session) return;
+        
+        if (session.currentExerciseIdx < session.exercises.length - 1) {
+          session.currentExerciseIdx++;
+          session.restTimeLeft = 0;
+          if (this.timerInterval) clearInterval(this.timerInterval);
+          this.refreshWorkoutMode();
+        }
+      }
+
+      previousExercise() {
+        const session = this.workoutSession;
+        if (!session) return;
+        
+        if (session.currentExerciseIdx > 0) {
+          session.currentExerciseIdx--;
+          session.restTimeLeft = 0;
+          if (this.timerInterval) clearInterval(this.timerInterval);
+          this.refreshWorkoutMode();
+        }
+      }
+
+      refreshWorkoutMode() {
+        document.querySelector('.workout-mode')?.remove();
+        this.renderWorkoutMode();
+      }
+
+      async finishWorkout() {
+        const session = this.workoutSession;
+        if (!session) return;
+        
+        const duration = Math.floor((Date.now() - session.startTime) / 1000 / 60);
+        const completedSets = session.exercises.reduce((acc, ex) => 
+          acc + ex.completed.filter(Boolean).length, 0);
+        
+        const summary = {
+          date: new Date().toISOString(),
+          week: session.week,
+          day: session.day,
+          duration,
+          completedSets,
+          totalSets: session.exercises.reduce((acc, ex) => acc + ex.sets, 0),
+          exercises: session.exercises.map(ex => ({
+            name: ex.name,
+            weight: ex.weight,
+            completed: ex.completed.filter(Boolean).length,
+            total: ex.sets
+          }))
+        };
+        
+        await this.saveHistory(summary);
+        
+        alert(`✅ Séance terminée!\n\n⏱️ Durée: ${duration} min\n📊 Séries: ${completedSets}/${summary.totalSets}\n\nBravo! 💪`);
+        
+        this.exitWorkoutMode();
+      }
+
+      cancelWorkout() {
+        if (confirm('❌ Annuler la séance?\nLa progression ne sera pas sauvegardée.')) {
+          this.exitWorkoutMode();
+        }
+      }
+
+      exitWorkoutMode() {
+        if (this.timerInterval) clearInterval(this.timerInterval);
+        document.querySelector('.workout-mode')?.remove();
+        this.workoutSession = null;
+      }
+
+      playBeep() {
+        try {
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          
+          oscillator.frequency.value = 800;
+          oscillator.type = 'sine';
+          gainNode.gain.value = 0.3;
+          
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.2);
+        } catch(e) {
+          console.log('Son non disponible');
+        }
+      }
+
+      editExercises() {
+        const day = this.currentDay;
+        const workout = this.program[day];
+        
+        let html = `
+          <div class="modal-overlay">
+            <div class="modal-content">
+              <h2 style="margin-bottom: 20px;">✏️ Éditer ${workout.title}</h2>
+              <div id="exerciseEditor">
+        `;
+        
+        workout.exercises.forEach((ex, idx) => {
+          html += `
+            <div class="exercise-block" style="margin-bottom: 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <strong>${ex.name}</strong>
+                <button class="btn" onclick="app.deleteExercise(${idx})" style="background: var(--danger); padding: 8px 15px;">
+                  🗑️ Supprimer
+                </button>
+              </div>
+              <div class="form-group">
+                <label>Nom</label>
+                <input type="text" value="${ex.name}" onchange="app.updateExerciseField(${idx}, 'name', this.value)">
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group">
+                  <label>Séries</label>
+                  <input type="number" value="${ex.sets}" onchange="app.updateExerciseField(${idx}, 'sets', parseInt(this.value))">
+                </div>
+                <div class="form-group">
+                  <label>Reps</label>
+                  <input type="text" value="${ex.reps}" onchange="app.updateExerciseField(${idx}, 'reps', this.value)">
+                </div>
+                <div class="form-group">
+                  <label>Poids départ (kg)</label>
+                  <input type="number" step="0.5" value="${ex.startWeight}" onchange="app.updateExerciseField(${idx}, 'startWeight', parseFloat(this.value))">
+                </div>
+                <div class="form-group">
+                  <label>Repos (s)</label>
+                  <input type="number" value="${ex.rest}" onchange="app.updateExerciseField(${idx}, 'rest', parseInt(this.value))">
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        
+        html += `
+              </div>
+              <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn" onclick="app.addExercise()">➕ Ajouter exercice</button>
+                <button class="btn secondary" onclick="app.closeEditor()">❌ Fermer</button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', html);
+      }
+
+      updateExerciseField(idx, field, value) {
+        const day = this.currentDay;
+        this.program[day].exercises[idx][field] = value;
+        this.saveCustomExercises();
+      }
+
+      deleteExercise(idx) {
+        if (confirm('Supprimer cet exercice?')) {
+          const day = this.currentDay;
+          this.program[day].exercises.splice(idx, 1);
+          this.program[day].totalSets = this.program[day].exercises.reduce((acc, ex) => acc + ex.sets, 0);
+          this.saveCustomExercises();
+          this.closeEditor();
+          this.updateDisplay();
+        }
+      }
+
+      addExercise() {
+        const name = prompt('Nom du nouvel exercice:');
+        if (!name) return;
+        
+        const day = this.currentDay;
+        this.program[day].exercises.push({
+          name,
+          sets: 4,
+          reps: "10",
+          rest: 60,
+          startWeight: 20,
+          increment: 2.5,
+          frequency: 2,
+          targetWeight: 50,
+          type: "compound",
+          muscles: {primary: [], secondary: [], tertiary: []}
+        });
+        
+        this.program[day].totalSets += 4;
+        this.saveCustomExercises();
+        this.closeEditor();
+        this.updateDisplay();
+      }
+
+      closeEditor() {
+        document.querySelector('.modal-overlay')?.remove();
+      }
+
+      showHistory() {
+        if (!this.workoutHistory || this.workoutHistory.length === 0) {
+          alert('📊 Aucun historique disponible.\nCommencez une séance pour créer votre historique!');
+          return;
+        }
+        
+        let html = `
+          <div class="modal-overlay">
+            <div class="modal-content">
+              <h2 style="margin-bottom: 20px;">📊 Historique des séances</h2>
+              <div style="max-height: 60vh; overflow-y: auto;">
+        `;
+        
+        this.workoutHistory.slice().reverse().forEach(session => {
+          const date = new Date(session.date).toLocaleDateString('fr-FR');
+          const completion = Math.round((session.completedSets / session.totalSets) * 100);
+          
+          html += `
+            <div class="history-item">
+              <div class="history-date">${date} - Semaine ${session.week}</div>
+              <div style="color: var(--muted); margin-bottom: 10px;">${session.day}</div>
+              <div class="history-stats">
+                <div>
+                  <div style="font-size: 24px; font-weight: 900; color: var(--accent);">${session.duration} min</div>
+                  <div style="font-size: 12px; color: var(--muted);">Durée</div>
+                </div>
+                <div>
+                  <div style="font-size: 24px; font-weight: 900; color: var(--success);">${session.completedSets}/${session.totalSets}</div>
+                  <div style="font-size: 12px; color: var(--muted);">Séries</div>
+                </div>
+                <div>
+                  <div style="font-size: 24px; font-weight: 900; color: var(--secondary);">${completion}%</div>
+                  <div style="font-size: 12px; color: var(--muted);">Complété</div>
+                </div>
+              </div>
+              <details style="margin-top: 10px;">
+                <summary style="cursor: pointer; color: var(--accent);">Voir détails</summary>
+                <div style="margin-top: 10px;">
+          `;
+          
+          session.exercises.forEach(ex => {
+            html += `
+              <div style="padding: 8px; background: rgba(255,255,255,0.03); border-radius: 6px; margin-top: 5px;">
+                <strong>${ex.name}</strong>: ${ex.completed}/${ex.total} séries @ ${ex.weight}kg
+              </div>
+            `;
+          });
+          
+          html += `
+                </div>
+              </details>
+            </div>
+          `;
+        });
+        
+        html += `
+              </div>
+              <button class="btn secondary" onclick="app.closeHistory()" style="width: 100%; margin-top: 20px;">
+                ❌ Fermer
+              </button>
+            </div>
+          </div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', html);
+      }
+
+      closeHistory() {
+        document.querySelector('.modal-overlay')?.remove();
+      }
+
+      showTests() {
+        console.log('\n🧪 ╔══════════════════════════════════════════╗');
+        console.log('    TESTS DE VALIDATION - HYBRID MASTER 51');
+        console.log('╚══════════════════════════════════════════╝\n');
+        
+        const results = [];
+        
+        // Test 1: Trap Bar Deadlift S26
+        const trapBarS26 = this.calculateWeight(this.program.dimanche.exercises[0], 26);
+        const test1 = trapBarS26 === 120;
+        results.push({name: 'Trap Bar Deadlift S26', expected: '120kg', actual: `${trapBarS26}kg`, pass: test1});
+        console.log(`${test1 ? '✅' : '❌'} TEST 1: Trap Bar S26 = ${trapBarS26}kg (attendu: 120kg)`);
+        
+        // Test 2: Dumbbell Press S12
+        const dbPressS12 = this.calculateWeight(this.program.mardi.exercises[0], 12);
+        const test2 = Math.abs(dbPressS12 - 30) < 0.1;
+        results.push({name: 'Dumbbell Press S12', expected: '30kg', actual: `${dbPressS12}kg`, pass: test2});
+        console.log(`${test2 ? '✅' : '❌'} TEST 2: Dumbbell Press S12 = ${dbPressS12}kg (attendu: 30kg)`);
+        
+        // Test 3: Deload S6
+        const test3 = this.isDeloadWeek(6);
+        results.push({name: 'Deload S6', expected: 'true', actual: test3.toString(), pass: test3});
+        console.log(`${test3 ? '✅' : '❌'} TEST 3: Semaine 6 est deload = ${test3}`);
+        
+        // Test 4: Bloc S15
+        const blocS15 = this.getCurrentBlock(15);
+        const test4 = blocS15 === 3;
+        results.push({name: 'Bloc S15', expected: '3', actual: blocS15.toString(), pass: test4});
+        console.log(`${test4 ? '✅' : '❌'} TEST 4: Semaine 15 = Bloc ${blocS15} (attendu: Bloc 3)`);
+        
+        // Test 5: Biceps S9
+        const bicepsS9 = this.getBicepsExercise(9);
+        const test5 = bicepsS9 === "Spider Curl";
+        results.push({name: 'Biceps S9', expected: 'Spider Curl', actual: bicepsS9, pass: test5});
+        console.log(`${test5 ? '✅' : '❌'} TEST 5: Semaine 9 biceps = ${bicepsS9} (attendu: Spider Curl)`);
+        
+        // Test 6: Séries Dimanche
+        const seriesDimanche = this.program.dimanche.totalSets;
+        const test6 = seriesDimanche === 31;
+        results.push({name: 'Séries Dimanche', expected: '31', actual: seriesDimanche.toString(), pass: test6});
+        console.log(`${test6 ? '✅' : '❌'} TEST 6: Dimanche = ${seriesDimanche} séries (attendu: 31)`);
+        
+        // Test 7: Séries Mardi
+        const seriesMardi = this.program.mardi.totalSets;
+        const test7 = seriesMardi === 35;
+        results.push({name: 'Séries Mardi', expected: '35', actual: seriesMardi.toString(), pass: test7});
+        console.log(`${test7 ? '✅' : '❌'} TEST 7: Mardi = ${seriesMardi} séries (attendu: 35)`);
+        
+        // Test 8: Séries Vendredi
+        const seriesVendredi = this.program.vendredi.totalSets;
+        const test8 = seriesVendredi === 33;
+        results.push({name: 'Séries Vendredi', expected: '33', actual: seriesVendredi.toString(), pass: test8});
+        console.log(`${test8 ? '✅' : '❌'} TEST 8: Vendredi = ${seriesVendredi} séries (attendu: 33)`);
+        
+        // Test 9: Deload S6 -40%
+        const trapBarS6Deload = this.calculateWeight(this.program.dimanche.exercises[0], 6);
+        const expectedS6 = 80 * 0.6;
+        const test9 = Math.abs(trapBarS6Deload - expectedS6) < 1;
+        results.push({name: 'Deload S6 -40%', expected: `~${expectedS6.toFixed(1)}kg`, actual: `${trapBarS6Deload}kg`, pass: test9});
+        console.log(`${test9 ? '✅' : '❌'} TEST 9: Trap Bar S6 (deload) = ${trapBarS6Deload}kg (attendu: ~${expectedS6.toFixed(1)}kg)`);
+        
+        // Test 10: Séance Maison
+        const test10 = this.program.maison && this.program.maison.exercises[0].name === "Hammer Curl";
+        results.push({name: 'Séance Maison', expected: 'Hammer Curl', actual: this.program.maison?.exercises[0]?.name || 'ABSENT', pass: test10});
+        console.log(`${test10 ? '✅' : '❌'} TEST 10: Séance maison Hammer Curl = ${test10}`);
+        
+        const allPass = results.every(r => r.pass);
+        const passCount = results.filter(r => r.pass).length;
+        
+        console.log('\n╔══════════════════════════════════════════╗');
+        console.log(`RÉSULTAT FINAL: ${passCount}/10 tests réussis`);
+        console.log(`${allPass ? '🎉 TOUS LES TESTS SONT PASSÉS!' : '⚠️ CERTAINS TESTS ONT ÉCHOUÉ'}`);
+        console.log('╚══════════════════════════════════════════╝\n');
+        
+        let html = `
+          <div class="test-results">
+            <h2 style="font-size: 24px; font-weight: 900; margin-bottom: 20px; color: ${allPass ? 'var(--success)' : 'var(--danger)'};">
+              🧪 TESTS DE VALIDATION PROGRAMME
+            </h2>
+            <div style="font-size: 18px; margin-bottom: 20px;">
+              Résultat: <strong class="${allPass ? 'test-pass' : 'test-fail'}">${passCount}/10 tests réussis</strong>
+            </div>
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--accent);">
+                  <th style="text-align: left; padding: 10px;">Test</th>
+                  <th style="text-align: left; padding: 10px;">Attendu</th>
+                  <th style="text-align: left; padding: 10px;">Obtenu</th>
+                  <th style="text-align: center; padding: 10px;">Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+        `;
+        
+        results.forEach(r => {
+          html += `
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+              <td style="padding: 10px;">${r.name}</td>
+              <td style="padding: 10px;">${r.expected}</td>
+              <td style="padding: 10px;">${r.actual}</td>
+              <td style="padding: 10px; text-align: center;">
+                <span class="${r.pass ? 'test-pass' : 'test-fail'}" style="font-size: 24px;">
+                  ${r.pass ? '✅' : '❌'}
+                </span>
+              </td>
+            </tr>
+          `;
+        });
+        
+        html += `
+              </tbody>
+            </table>
+            <div style="margin-top: 20px; padding: 15px; background: ${allPass ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)'}; border-radius: 10px;">
+              <strong>${allPass ? '✅ VALIDATION COMPLÈTE' : '⚠️ CORRECTIONS NÉCESSAIRES'}</strong><br>
+              ${allPass ? 'Le programme est 100% conforme aux spécifications.' : 'Certains tests ont échoué. Vérifiez les valeurs ci-dessus.'}
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('testResults').innerHTML = html;
+        document.getElementById('testResults').scrollIntoView({behavior: 'smooth'});
+      }
+    }
+
+    // Initialisation de l'application
+    const app = new HybridMaster51();
+    window.app = app;
+    
+    console.log('\n🚀 ╔══════════════════════════════════════════╗');
+    console.log('    HYBRID MASTER 51 - VERSION INTERACTIVE');
+    console.log('╚══════════════════════════════════════════╝');
+    console.log('\n💡 Nouvelles fonctionnalités:');
+    console.log('   💪 Séance interactive avec timer automatique');
+    console.log('   ✅ Cocher chaque série en temps réel');
+    console.log('   📊 Historique et stats sauvegardés');
+    console.log('   ✏️ Éditeur d\'exercices complet');
+    console.log('   ⚖️ Ajustement des poids en direct');
+    console.log('   🔄 Rotation automatique des exercices biceps');
+    console.log('   🏠 Séance maison Hammer Curl intégrée');
+    console.log('   🔥 Protocole d\'échauffement complet\n');
+  </script>
+</body>
+</html>
